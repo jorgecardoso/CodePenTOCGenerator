@@ -1,8 +1,8 @@
 // ==UserScript==
 // @name         CodePen TOC Generator
 // @namespace    http://tampermonkey.net/
-// @version      0.2
-// @description  Generates TOC for Markdown posts in CodePen
+// @version      0.3
+// @description  Generates TOC for Markdown posts in CodePen. Look for an additional "TOC" button in the post toolbar. Just click it and then Ctrl-V where you want the TOC to appear.
 // @author       jorgecardoso
 // @match        https://codepen.io/write/*
 // @grant        none
