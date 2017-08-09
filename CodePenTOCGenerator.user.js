@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         CodePen TOC Generator
 // @namespace    http://tampermonkey.net/
-// @version      0.1
+// @version      0.2
 // @description  Generates TOC for Markdown posts in CodePen
 // @author       jorgecardoso
 // @match        https://codepen.io/write/*
