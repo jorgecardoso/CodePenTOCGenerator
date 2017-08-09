@@ -6,6 +6,7 @@
 // @author       jorgecardoso
 // @match        https://codepen.io/write/*
 // @grant        none
+// @updateURL https://openuserjs.org/meta/jorgecardoso/CodePen_TOC_Generator.meta.js
 // ==/UserScript==
 
 (function() {
@@ -41,12 +42,13 @@
             var foundBookmark = line.match(/<a name=(.*)><\/a>/);
             if (isPrevLineHeading) {
                 var tocEntry;
+                var newLineText;
                 if (foundBookmark) {
-                    var newLineText =  line.replace(foundBookmark[0], "<a name='" + tocid  + "'></a>");
+                    newLineText =  line.replace(foundBookmark[0], "<a name='" + tocid  + "'></a>");
                     editor.replaceRange(newLineText, {line: i, ch: 0}, {line: i, ch: line.length});
                     tocEntry = getTOCEntry(getHeadingText(editor.getLine(i+1)), tocid, getHeadingLevel(editor.getLine(i+1)));
                 } else {
-                    var newLineText =  "\n<a name='" + tocid + "'></a>";
+                    newLineText =  "\n<a name='" + tocid + "'></a>";
                     editor.replaceRange(newLineText, {line: i, ch: line.length}, {line: i, ch: line.length});
                     tocEntry = getTOCEntry(getHeadingText(editor.getLine(i+2)), tocid, getHeadingLevel(editor.getLine(i+2)));
                 }
@@ -56,11 +58,8 @@
 
             }
 
-            if (isHeadingLine(line)) {
-                isPrevLineHeading = true;
-            } else {
-                isPrevLineHeading = false;
-            }
+            isPrevLineHeading = isHeadingLine(line);
+
         }
         textarea.value=toc.join("\n");
         textarea.select();
@@ -80,7 +79,7 @@
     function getHeadingText(line) {
         line = line.trim();
         for (var i = 0; i < line.length; i++) {
-            if (line.charAt(i) != '#') {
+            if (line.charAt(i) !== '#') {
                 return line.substr(i).trim();
             }
         }
@@ -89,7 +88,7 @@
     function getHeadingLevel(line) {
         line = line.trim();
         for (var i = 0; i < line.length; i++) {
-            if (line.charAt(i) != '#') {
+            if (line.charAt(i) !== '#') {
                 return i-1;
             }
         }
