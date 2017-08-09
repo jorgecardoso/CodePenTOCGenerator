@@ -61,9 +61,11 @@
             isPrevLineHeading = isHeadingLine(line);
 
         }
+        textarea.setAttribute("style", "display:original");
         textarea.value=toc.join("\n");
         textarea.select();
         document.execCommand("Copy");
+        textarea.setAttribute("style", "display:none");
     });
 
 
